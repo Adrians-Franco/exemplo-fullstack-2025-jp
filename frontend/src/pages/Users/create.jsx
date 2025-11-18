@@ -7,10 +7,11 @@
 import { useState } from "react"
 import { createUser } from "../../api/users";
 import { useNavigate } from "react-router-dom";
+import './styles.css'
 
 export default function CreateUser() {
     const navigate = useNavigate()
-    const [ user, setUser ] = useState({
+    const [user, setUser] = useState({
         nome: '',
         email: '',
         senha: '',
@@ -30,7 +31,7 @@ export default function CreateUser() {
         // seria idela validar os valores do objeto antes de enviar
         const response = await createUser(user)
 
-        if(response.status === 201) {
+        if (response.status === 201) {
             navigate('/users')
         } else {
             console.log(response)
@@ -38,7 +39,7 @@ export default function CreateUser() {
     }
 
     return (
-        <main>
+        <div className="form">
             <form>
                 <div>
                     <label>Nome: </label>
@@ -50,16 +51,16 @@ export default function CreateUser() {
                 </div>
                 <div>
                     <label>Senha: </label>
-                    <input type="password" name="senha" id='senha' value={user.senha} onChange={handleChange}/>
+                    <input type="password" name="senha" id='senha' value={user.senha} onChange={handleChange} />
                 </div>
-                <button type="reset">Limpar</button>
-                <button
-                    type="submit"
-                    onClick={handleSave}
-                >Enviar</button>
+                <div className="actions">
+                    <button type="reset">Limpar</button>
+                    <button
+                        type="submit"
+                        onClick={handleSave}
+                    >Enviar</button>
+                </div>
             </form>
-
-        
-        </main>
+        </div>
     )
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getUsers } from '../../api/users'
 import { Link } from 'react-router-dom'
-// import './styles.css'
+import './styles.css'
 
 function Users() {
     const [conteudo, setConteudo] = useState(<>Carregando</>)
