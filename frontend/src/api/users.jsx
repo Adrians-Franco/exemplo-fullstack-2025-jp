@@ -27,3 +27,10 @@ export const deleteUser = async (id) => {
 
     return response
 }
+
+export const loginUser = async (email, senha) => {
+    const response = await api
+        .post('/api/v1/login', { email, senha })
+
+   return response
+}

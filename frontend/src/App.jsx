@@ -8,10 +8,11 @@ import CreateUser from './pages/Users/create'
 import UpdateUser from './pages/Users/update'
 import { ToastContainer } from 'react-toastify'
 import Login from './pages/Login'
+import { AuthProvider } from './auth/Context'
 
 function App() {
   return (
-    <>
+    <AuthProvider>
       <Header />
       <Routes>
         <Route path='/' element={<Home />} />
@@ -20,7 +21,7 @@ function App() {
         <Route path='/create/user' element={<CreateUser />} />
         <Route path='/update/user' element={<UpdateUser />} />
       </Routes>
-      
+
       <ToastContainer
         position="bottom-center"
         autoClose={3500}
@@ -35,7 +36,7 @@ function App() {
       />
 
       <Footer />
-    </>
+    </AuthProvider>
   )
 }
 
