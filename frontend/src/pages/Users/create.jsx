@@ -2,6 +2,7 @@ import { useState } from "react"
 import { createUser } from "../../api/users";
 import { useNavigate } from "react-router-dom";
 import './styles.css'
+import { toast } from "react-toastify";
 
 const INITIAL_STATE = {
     nome: '',
@@ -33,8 +34,10 @@ export default function CreateUser() {
         const response = await createUser(user)
 
         if (response.status === 201) {
+            toast("Usuário criado com sucesso")
             navigate('/users')
         } else {
+            toast("Erro ao criar Usuário")
             console.log(response)
         }
     }

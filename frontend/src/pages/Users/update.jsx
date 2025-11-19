@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { updateUser } from "../../api/users";
 import { useLocation, useNavigate } from "react-router-dom";
 import './styles.css'
+import { toast } from "react-toastify";
 
 export default function UpdateUser() {
     const navigate = useNavigate()
@@ -26,7 +27,7 @@ export default function UpdateUser() {
     const handleReset = (e) => {
         e.preventDefault()
         // alterado do init para o prev
-        setUser({...prevUser, senha: ''})
+        setUser({ ...prevUser, senha: '' })
     }
 
     const handleSave = async (e) => {
@@ -36,14 +37,16 @@ export default function UpdateUser() {
 
         if (response.status === 200) {
             navigate('/users')
+            toast("Usuário alterado com sucesso")
         } else {
+            toast("Erro ao criar Usuário")
             console.log(response)
         }
     }
 
     // Adicionado
     useEffect(() => {
-        setUser({ ...prevUser, senha: ''})
+        setUser({ ...prevUser, senha: '' })
     }, [])
 
     return (
