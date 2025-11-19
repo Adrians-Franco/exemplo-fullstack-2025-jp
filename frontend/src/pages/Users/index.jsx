@@ -1,11 +1,16 @@
 import { useEffect, useState } from 'react'
 import { deleteUser, getUsers } from '../../api/users'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './styles.css'
 import { toast } from 'react-toastify'
 
 function Users() {
+    const navigate = useNavigate()
     const [ users, setUsers ] = useState([])
+
+    const handleUpdate = async (user) => {
+        navigate('/update/user', { state: { user }})
+    }
 
     const handleDelete = async (id) => {
         const response = await deleteUser(id)
@@ -47,7 +52,10 @@ function Users() {
                             <label>{ user.nome }</label>
                             <label>{ user.email }</label>
                             <div className='actions'>
-                                <button>Alterar</button>
+                                <button
+                                    type='button'
+                                    onClick={() => handleUpdate(user)}
+                                >Alterar</button>
                                 <button
                                     type='button'
                                     onClick={() => handleDelete(user.id)}
