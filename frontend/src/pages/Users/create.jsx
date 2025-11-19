@@ -1,22 +1,18 @@
-// {
-//     "nome": "Teste para front",
-//     "email": "batata2@batata2.com",
-//     "senha": "123",
-//     "ativo": true
-
 import { useState } from "react"
 import { createUser } from "../../api/users";
 import { useNavigate } from "react-router-dom";
 import './styles.css'
 
+const INITIAL_STATE = {
+    nome: '',
+    email: '',
+    senha: '',
+    ativo: true
+}
+
 export default function CreateUser() {
     const navigate = useNavigate()
-    const [user, setUser] = useState({
-        nome: '',
-        email: '',
-        senha: '',
-        ativo: true
-    })
+    const [user, setUser] = useState(INITIAL_STATE)
 
     const handleChange = (e) => {
         const { id, value } = e.target;
@@ -24,6 +20,11 @@ export default function CreateUser() {
             ...user,
             [id]: value
         })
+    }
+
+    const handleReset = (e) => {
+        e.preventDefault()
+        setUser(INITIAL_STATE)
     }
 
     const handleSave = async (e) => {
@@ -54,7 +55,10 @@ export default function CreateUser() {
                     <input type="password" name="senha" id='senha' value={user.senha} onChange={handleChange} />
                 </div>
                 <div className="actions">
-                    <button type="reset">Limpar</button>
+                    <button
+                        type="reset"
+                        onClick={handleReset}
+                    >Limpar</button>
                     <button
                         type="submit"
                         onClick={handleSave}

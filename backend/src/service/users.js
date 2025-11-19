@@ -53,8 +53,10 @@ class ServiceUser {
         // User.Update(id, nome)
     }
 
-    Delete(id) {
-        // User.Delete(id)
+    async Delete(id) {
+        const oldUser = await User.findByPk(id)
+
+        oldUser.destroy()
     }
 
     async Login(email, senha) {
