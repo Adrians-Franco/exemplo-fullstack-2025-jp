@@ -22,6 +22,7 @@ export default function Login() {
             const response = await loginUser(email, senha)
             console.log(response)
             login(response.data.token)
+            navigate('/users')
         } catch (error) {
             toast("Email ou senha inválidos")
         }

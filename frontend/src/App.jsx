@@ -9,17 +9,23 @@ import UpdateUser from './pages/Users/update'
 import { ToastContainer } from 'react-toastify'
 import Login from './pages/Login'
 import { AuthProvider } from './auth/Context'
+import PrivateRoute from './router/PrivateRoute'
 
 function App() {
+  // pegar token 
   return (
     <AuthProvider>
       <Header />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/users' element={<Users />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/create/user' element={<CreateUser />} />
-        <Route path='/update/user' element={<UpdateUser />} />
+
+        <Route element={<PrivateRoute />}>
+          <Route path='/users' element={<Users />} />
+          <Route path='/create/user' element={<CreateUser />} />
+          <Route path='/update/user' element={<UpdateUser />} />
+        </Route>
+
       </Routes>
 
       <ToastContainer
